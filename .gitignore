@@ -1,2 +1,6 @@
 .vscode
-playground
+.python-version
+GEMINI.md
+job_description.txt
+.env
+__pycache__/

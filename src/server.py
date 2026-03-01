@@ -2,7 +2,7 @@ from contextlib import asynccontextmanager
 from pydantic import BaseModel, Field
 from langgraph.graph.state import CompiledStateGraph
 from fastapi import FastAPI, HTTPException, Depends, Request
-from agent import ZabbixAlert, create_graph_agent
+from src.agent import ZabbixAlert, create_graph_agent
 import uuid
 
 # Generate a random UUID (version 4)
@@ -38,7 +38,7 @@ def get_graph(request: Request) -> CompiledStateGraph:
 random_uuid = uuid.uuid4()
 
 @app.post("/webhook")
-def webhook(zabbix_alert: ZabbixAlert, graph: CompiledStateGraph = Depends(get_graph)):
-    response = graph.invoke({"zabbix_alert": zabbix_alert})
+async def webhook(zabbix_alert: ZabbixAlert, graph: CompiledStateGraph = Depends(get_graph)):
+    response = await graph.ainvoke({"zabbix_alert": zabbix_alert})
 
     return {"easyvista_ticket": response["easyvista_ticket"]}

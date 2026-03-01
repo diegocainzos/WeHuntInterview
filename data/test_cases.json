@@ -1,0 +1,134 @@
+[
+  {
+    "name": "1. BGP Session Down",
+    "payload": {
+      "alert_id": "NET-BGP-ERR-001",
+      "server_id": "core-router-01",
+      "data": "The BGP session with a primary upstream provider has transitioned from Established to Idle.",
+      "urgency_level": 5
+    },
+    "expected_category": "network",
+    "expected_keywords": ["show ip bgp neighbors", "maximum-prefix", "BGP-3-NOTIFICATION"]
+  },
+  {
+    "name": "2. VLAN Tagging Mismatch",
+    "payload": {
+      "alert_id": "NET-VLAN-ERR-042",
+      "server_id": "hypervisor-04",
+      "data": "Packet loss between Hypervisors and Top-of-Rack switches.",
+      "urgency_level": 4
+    },
+    "expected_category": "network",
+    "expected_keywords": ["show interfaces trunk", "switchport trunk allowed", "sub-interface"]
+  },
+  {
+    "name": "3. Anycast Routing Latency Spike",
+    "payload": {
+      "alert_id": "NET-LAT-ANY-009",
+      "server_id": "lb-anycast-02",
+      "data": "Internal Anycast VIPs are experiencing >50ms latency indicating a Routing Flap.",
+      "urgency_level": 4
+    },
+    "expected_category": "network",
+    "expected_keywords": ["mtr -rn", "health-checking daemon", "Route flap dampened"]
+  },
+  {
+    "name": "4. MTU Mismatch (ICMP Blackhole)",
+    "payload": {
+      "alert_id": "NET-MTU-SIZE-005",
+      "server_id": "tunnel-gw-01",
+      "data": "Large packets (HTTPS/DB queries) fail or hang over GRE tunnel.",
+      "urgency_level": 3
+    },
+    "expected_category": "network",
+    "expected_keywords": ["ping -M do", "TCPMSS", "clamp-mss-to-pmtu"]
+  },
+  {
+    "name": "5. SSH Brute Force Attack",
+    "payload": {
+      "alert_id": "SEC-SSH-BRUTE-010",
+      "server_id": "production-web-01",
+      "data": "High volume of failed SSH login attempts (>50 in 60 seconds) detected.",
+      "urgency_level": 4
+    },
+    "expected_category": "security",
+    "expected_keywords": ["fail2ban", "iptables -A INPUT", "PasswordAuthentication"]
+  },
+  {
+    "name": "6. SSL/TLS Certificate Expiry",
+    "payload": {
+      "alert_id": "SEC-CERT-EXP-003",
+      "server_id": "api-gateway-01",
+      "data": "The SSL certificate for a production endpoint will expire in less than 7 days.",
+      "urgency_level": 3
+    },
+    "expected_category": "security",
+    "expected_keywords": ["openssl x509", "certbot renew", "acme-challenge"]
+  },
+  {
+    "name": "7. Anomalous API Token Usage",
+    "payload": {
+      "alert_id": "SEC-API-ANOM-007",
+      "server_id": "auth-server-02",
+      "data": "A specific API key is performing 500% more requests than the historical baseline.",
+      "urgency_level": 5
+    },
+    "expected_category": "security",
+    "expected_keywords": ["token_id", "Revoke Token", "Rotate Credentials"]
+  },
+  {
+    "name": "8. Directory Traversal Attempt",
+    "payload": {
+      "alert_id": "SEC-WAF-TRAV-012",
+      "server_id": "frontend-web-03",
+      "data": "WAF has blocked multiple requests containing ../ or /etc/passwd patterns.",
+      "urgency_level": 4
+    },
+    "expected_category": "security",
+    "expected_keywords": ["WAF Logs", "ModSecurity Rules", "temporary blacklist"]
+  },
+  {
+    "name": "9. SSD S.M.A.R.T. Failure Prediction",
+    "payload": {
+      "alert_id": "HW-DISK-SMART-002",
+      "server_id": "db-master-01",
+      "data": "The smartd daemon reports that a physical SSD has exceeded its wear-level threshold.",
+      "urgency_level": 4
+    },
+    "expected_category": "hardware",
+    "expected_keywords": ["smartctl", "mdadm --detail", "Physical Replacement"]
+  },
+  {
+    "name": "10. Chassis Fan RPM Below Threshold",
+    "payload": {
+      "alert_id": "HW-FAN-SPEED-008",
+      "server_id": "compute-node-12",
+      "data": "Fan sensor Fan_4_CPU_Exhaust is reporting <500 RPM.",
+      "urgency_level": 3
+    },
+    "expected_category": "hardware",
+    "expected_keywords": ["sensors", "IPMI", "Workload Migration"]
+  },
+  {
+    "name": "11. ECC Memory Correctable Error",
+    "payload": {
+      "alert_id": "HW-MEM-ECC-004",
+      "server_id": "cache-redis-01",
+      "data": "The kernel is reporting a high frequency of single-bit flips on a specific DIMM slot.",
+      "urgency_level": 3
+    },
+    "expected_category": "hardware",
+    "expected_keywords": ["dmesg | grep -i edac", "Reseat", "memtest86+"]
+  },
+  {
+    "name": "12. RAID Controller Battery Failure",
+    "payload": {
+      "alert_id": "HW-RAID-BBU-001",
+      "server_id": "storage-san-04",
+      "data": "The Backup Battery Unit (BBU) for the RAID controller has failed.",
+      "urgency_level": 4
+    },
+    "expected_category": "hardware",
+    "expected_keywords": ["perccli /c0/bbu show", "Write-Through", "Write-Back mode"]
+  }
+]
