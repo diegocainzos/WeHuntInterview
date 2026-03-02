@@ -55,12 +55,11 @@ else:
     urgency = st.sidebar.slider("Nivel de Urgencia", 1, 5, 3)
 
 # --- PANEL PRINCIPAL ---
-st.title("🚀 We Hunt: Agente de Auto-Remediación SRE")
+st.title("🚀 Agente de Auto-Remediación SRE")
 
 # Introducción para el reclutador
 st.markdown("""
 <div class="intro-box">
-    <h4>👋 ¡Hola, equipo de We Hunt!</h4>
     <p>Este dashboard demuestra una solución completa de <b>AI Engineering</b> diseñada para la automatización de operaciones (SRE).</p>
     <ul>
         <li><b>Orquestación:</b> Utiliza <code>LangGraph</code> (asíncrono) para gestionar el ciclo de vida del incidente de forma determinista.</li>
