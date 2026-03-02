@@ -1,4 +1,4 @@
-# 🚀 We Hunt: Agente de Auto-Remediación SRE
+# 🚀 Agente de Auto-Remediación SRE
 
 
 <img src="mermaid-diagram.png" alt="Arquitectura del Agente" width="400"/>
